@@ -57,5 +57,3 @@ jobs:
 <<<<<<< HEAD
         run: mvn -Dremote.user=${{ secrets.REMOTE_USER, secrets.DB_USER }} -Dremote.password=${{ secrets.REMOTE_PW, secrets.DB_PW }} tomcat7:deploy
 =======
-        run: mvn -Dremote.user=${{ secrets.DB_USER }} -Dremote.password=${{ secrets.DB_PW }} tomcat7:deploy
->>>>>>> 1d32fbedb91d849b3634c144af0396ad71b7d0b8
