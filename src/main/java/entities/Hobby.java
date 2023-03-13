@@ -20,7 +20,7 @@ public class Hobby {
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
-    @OneToMany(mappedBy = "hobbyNamehobby")
+    @OneToMany(mappedBy = "Hobby_nameHobby")
     private Set<Person> people = new LinkedHashSet<>();
 
     public Set<Person> getPeople() {
