@@ -21,7 +21,7 @@ class HobbyTest {
     private final Person PERSON_2 = new Person();
 
     /**
-     * Opsæt hobbyobjektet før hver testmetode..
+     * Opsæt Hobby-objektet før hver testmetode.
      */
     @BeforeEach
     void setUp() {

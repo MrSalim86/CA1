@@ -20,7 +20,7 @@ class AddressTest {
     private final Person PERSON_2 = new Person();
 
     /**
-     * Opsæt adresseobjektet før hver testmetode.
+     * Opsæt Address-objektet før hver testmetode.
      */
     @BeforeEach
     void setUp() {

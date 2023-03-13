@@ -19,7 +19,7 @@ class PhoneTest {
     private final Person PERSON_2 = new Person();
 
     /**
-     * Opsæt telefonobjektet før hver testmetode.
+     * Opsæt Phone-objektet før hver testmetode.
      */
     @BeforeEach
     void setUp() {
