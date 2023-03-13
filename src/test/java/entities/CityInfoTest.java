@@ -25,7 +25,7 @@ class CityInfoTest {
      */
     @Nested
     @DisplayName("Test af CityInfo setters og getters")
-    class SettersAndGettersTest {
+    class CityInfoSettersAndGettersTest {
 
         /**
          * ester setId og getId-metoderne i CityInfo-klassen.
