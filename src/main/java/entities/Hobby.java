@@ -23,6 +23,12 @@ public class Hobby {
     @OneToMany(mappedBy = "Hobby_nameHobby")
     private Set<Person> people = new LinkedHashSet<>();
 
+    public Hobby() {
+    }
+
+    public Hobby(String name, String wikiLink, String category, String type) {
+    }
+
     public Set<Person> getPeople() {
         return people;
     }
@@ -62,4 +68,9 @@ public class Hobby {
     public void setId(String id) {
         this.id = id;
     }
+    public void getName() {
+    }
+
+
+
 }
