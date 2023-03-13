@@ -55,20 +55,20 @@ class AddressTest {
         }
 
         /**
-         * Tester setAdditionalInfo and getAdditionalInfo-metoderne i Address-klassen.
+         * Tester setAdditionalInfo og getAdditionalInfo-metoderne i Address-klassen.
          */
         @Test
-        @DisplayName("Tester setAdditionalInfo and getAdditionalInfo")
+        @DisplayName("Tester setAdditionalInfo og getAdditionalInfo")
         void testAdditionalInfoSetterGetter() {
             address.setAdditionalInfo(ADDITIONAL_INFO);
             assertEquals(ADDITIONAL_INFO, address.getAdditionalInfo());
         }
 
         /**
-         * Tester setPeople and getPeople-metoderne i Address-klassen.
+         * Tester setPeople og getPeople-metoderne i Address-klassen.
          */
         @Test
-        @DisplayName("Tester setPeople and getPeople")
+        @DisplayName("Tester setPeople og getPeople")
         void testPeopleSetterGetter() {
             Set<Person> people = new LinkedHashSet<>();
             people.add(PERSON_1);
