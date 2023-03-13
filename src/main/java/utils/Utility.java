@@ -28,11 +28,11 @@ public class Utility {
             }
     }
     
-    public static PersonDTO json2DTO(String json) throws UnsupportedEncodingException{
+    public static PersonDTO jsonToDTO(String json) throws UnsupportedEncodingException{
             return gson.fromJson(new String(json.getBytes("UTF8")), PersonDTO.class);
     }
     
-    public static String DTO2json(PersonDTO rmDTO){
+    public static String DTOToJson(PersonDTO rmDTO){
         return gson.toJson(rmDTO, PersonDTO.class);
     }
     
@@ -41,10 +41,10 @@ public class Utility {
         
         //Test json2DTO and back again
         String str2 = "{'id':1, 'str1':'Dette er den første tekst', 'str2':'Her er den ANDEN'}";
-        PersonDTO rmDTO = json2DTO(str2);
+        PersonDTO rmDTO = jsonToDTO (str2);
         System.out.println(rmDTO);
         
-        String backAgain = DTO2json(rmDTO);
+        String backAgain = DTOToJson(rmDTO);
         System.out.println(backAgain);
     }
 
