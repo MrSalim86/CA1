@@ -20,7 +20,7 @@ class AddressTest {
     private final Person PERSON_2 = new Person();
 
     /**
-     * Vi opsætter den metode, der kaldes, før hver testmetode køres.
+     * Opsæt adresseobjektet før hver testmetode.
      */
     @BeforeEach
     void setUp() {
