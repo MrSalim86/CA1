@@ -17,6 +17,11 @@ public class Phone {
     @OneToMany(mappedBy = "phonePhonenumber")
     private Set<Person> people = new LinkedHashSet<>();
 
+    public Phone() {
+
+    }
+
+
     public Set<Person> getPeople() {
         return people;
     }
