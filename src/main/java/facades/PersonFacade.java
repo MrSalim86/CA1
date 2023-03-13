@@ -127,4 +127,25 @@ public class PersonFacade {
             em.close();
         }
     }
+
+    /**
+     * Sletter en Person-entitet fra databasen.
+     *
+     * @param id'et for den Person-entitet, der skal slettes fra databasen (hvis den findes)
+     */
+    public void deletePerson(int id)
+    {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Person person = em.find(Person.class, id);
+            if (person == null) {
+                return;
+            }
+            em.getTransaction().begin();
+            em.remove(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }
