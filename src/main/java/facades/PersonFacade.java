@@ -2,13 +2,12 @@ package facades;
 
 import dtos.PersonDTO;
 import entities.Person;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-
-import utils.EMF_Creator;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PersonFacade-klassen leverer et par CRUD-operationer for Person-entiteten.
