@@ -19,7 +19,7 @@ public class PersonFacade {
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
 
-    private PersonFacade() {
+    public PersonFacade() {
     }
 
     /**
@@ -85,7 +85,8 @@ public class PersonFacade {
      *
      * @return en liste over DTO-objekter for alle Person-entiteter i databasen
      */
-    public List<PersonDTO> getAllPeople() {
+    public List<PersonDTO> getAllPersons()
+    {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
@@ -95,6 +96,33 @@ public class PersonFacade {
                 personDtos.add(new PersonDTO(person));
             }
             return personDtos;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Opdaterer en Person-entitet i databasen.
+     *
+     * @param personDTO DTO-objektet, der indeholder dataene for den Person-entitet, der skal opdateres
+     * @return DTO-objektet for den opdaterede Person-entitet, eller null, hvis den ikke findes
+     */
+    public PersonDTO editPerson(PersonDTO personDTO)
+    {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Person person = em.find(Person.class, personDTO.getId());
+            if (person == null) {
+                return null;
+            }
+            person.setFirstName(personDTO.getFirstName());
+            person.setLastName(personDTO.getLastName());
+            person.setEmail(personDTO.getEmail());
+            person.setAge(personDTO.getAge());
+            em.getTransaction().begin();
+            em.merge(person);
+            em.getTransaction().commit();
+            return new PersonDTO(person);
         } finally {
             em.close();
         }
