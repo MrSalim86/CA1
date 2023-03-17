@@ -54,6 +54,9 @@ public class AddressDTO {
         });
     }
 
+    public AddressDTO(String id, String additional_info, String street, String zipcode, String city) {
+    }
+
     public String getId() {
         return id;
     }
@@ -85,4 +88,5 @@ public class AddressDTO {
     public void setCityInfo(CityInfoDTO cityInfo) {
         this.cityInfo = cityInfo;
     }
+
 }

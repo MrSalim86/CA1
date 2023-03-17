@@ -5,10 +5,10 @@
     <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>entities.Address</class>
+        <class>entities.CityInfo</class>
+        <class>entities.Person</class>
         <class>entities.Hobby</class>
         <class>entities.Phone</class>
-        <class>entities.SkillLevel</class>
-
         <!--    <class>entities.RenameMe</class>-->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
@@ -37,7 +37,11 @@
     <persistence-unit name="puTest" transaction-type="RESOURCE_LOCAL">
         <!-- DO NOT RENAME THE PERSISTENCE UNIT -->
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <!--            <class>entities.RenameMe</class>-->
+        <class>entities.Address</class>
+        <class>entities.CityInfo</class>
+        <class>entities.Person</class>
+        <class>entities.Hobby</class>
+        <class>entities.Phone</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         
         <properties>

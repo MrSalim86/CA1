@@ -34,7 +34,7 @@ public class EMF_Creator {
 
     private static EntityManagerFactory createEntityManagerFactory(boolean isTest) {
 
-        
+
         boolean isDeployed = (System.getenv("DEPLOYED") != null);
         if (isDeployed) {
             /* Strategy for deployment */
@@ -52,7 +52,7 @@ public class EMF_Creator {
             props.setProperty("javax.persistence.jdbc.password", pw);
             props.setProperty("javax.persistence.jdbc.url", connection_str);
             props.setProperty("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
-            
+
             //Sets the production log-level to show only potential problems
             props.setProperty("eclipselink.logging.level","WARNING");
             props.setProperty("eclipselink.logging.level.sql","WARNING");
@@ -70,17 +70,17 @@ public class EMF_Creator {
         }
         EntityManagerFactory emf = null;
         try {
-         emf =  Persistence.createEntityManagerFactory(puName, null);
-       
+            emf =  Persistence.createEntityManagerFactory(puName, null);
+
         } catch (javax.persistence.PersistenceException ex){
             System.out.println("##########################################################");
             System.out.println("######      ERROR Creating a persistence Unit       ######");
             System.out.println("###### Have you started the dev and test databases? ######");
             System.out.println("######          (docker-compose up -d )             ######");
             System.out.println("##########################################################");
-            throw ex; 
+            throw ex;
         }
-         return emf;
+        return emf;
     }
 
     private static String getDbName() {
@@ -95,4 +95,9 @@ public class EMF_Creator {
         return pomProperties.getProperty("db.name");
     }
 
+    public static void shutdown()
+    {
+        EntityManagerFactory emf = createEntityManagerFactory();
+        emf.close();
+    }
 }
