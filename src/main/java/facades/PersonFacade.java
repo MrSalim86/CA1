@@ -1,13 +1,16 @@
 package facades;
 
-import dtos.HobbyDTO;
-import dtos.PersonDTO;
-import dtos.PhoneDTO;
+import dtos.*;
 import entities.*;
+import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,103 +1,39 @@
-package facades;
-
-import dtos.CityInfoDTO;
-import dtos.RenameMeDTO;
-import entities.CityInfo;
-import entities.RenameMe;
-import utils.EMF_Creator;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
-public class CityInfoFacade {
-
-    private static CityInfoFacade instance;
-    private static EntityManagerFactory emf;
-
-    //Private Constructor to ensure Singleton
-    private CityInfoFacade() {}
-
-
-    /**
-     *
-     * @param _emf
-     * @return an instance of this facade class.
-     */
-    public static CityInfoFacade getFacadeExample(EntityManagerFactory _emf) {
-        if (instance == null) {
-            emf = _emf;
-            instance = new CityInfoFacade();
-        }
-        return instance;
-    }
-
-    private EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    public CityInfoDTO getAllCityInfo() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c", CityInfo.class);
-            List<CityInfo> cityInfo = query.getResultList();
-            return new CityInfoDTO(cityInfo);
-        } finally {
-            em.close();
-        }
-    }
-
-    public CityInfoDTO getCityByZipCode(int zipCode) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c WHERE c.zipCode = :zipCode", CityInfo.class);
-            query.setParameter("zipCode", zipCode);
-            CityInfo cityInfo = query.getSingleResult();
-            return new CityInfoDTO(cityInfo);
-        } finally {
-            em.close();
-        }
-    }
-
-    public CityInfoDTO getCityByName(String city) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c WHERE c.city = :city", CityInfo.class);
-            query.setParameter("city", city);
-            CityInfo cityInfo;
-            try {
-                cityInfo = query.getSingleResult();
-            } catch (NoResultException e) {
-                // Handle the case when no result is found
-                return null;
-            }
-            return new CityInfoDTO(cityInfo);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<CityInfoDTO> getDanishZipCodes() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c", CityInfo.class);
-            List<CityInfo> cityInfoList = query.getResultList();
-            List<CityInfoDTO> danishZipCodes = new ArrayList<>();
-            for (CityInfo cityInfo : cityInfoList) {
-                if (cityInfo.getId() >= 800 && cityInfo.getId() <= 5932) {
-                    danishZipCodes.add(new CityInfoDTO(cityInfo));
-                }
-            }
-            return danishZipCodes;
-        } finally {
-            em.close();
-        }
-    }
-}
+package facades;///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//package facades;
+//
+//import dtos.PersonDTO;
+//import entities.*;
+//
+//import javax.persistence.EntityManagerFactory;
+//
+//import utils.EMF_Creator;
+//
+///**
+// *
+// * @author tha
+// */
+//public class Populator {
+//    public static void populate(){
+//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+//        PersonFacade fe = PersonFacade.getFacadeExample(emf);
+//        Person p = new Person("tobias@test.dk", "Tobias", "Hansen", 20);
+//        Phone ph = new Phone("23232323", "Home");
+//        p.addPhone(ph);
+//        Hobby h = new Hobby("Movies", "https://da.wikipedia.org/wiki/Movies", "Entertainment", "Freetime");
+//        p.addHobby(h);
+//        CityInfo c = new CityInfo(2100, "København Ø");
+//        Address a = new Address("Hovedgaden 1", "Hovedby", "test", c);
+//        p.setAddressStreet(a);
+//
+//        PersonDTO pdto = new PersonDTO(p);
+//        fe.createPerson(pdto);
+//    }
+//
+//    public static void main(String[] args) {
+//        populate();
+//    }
+//}
