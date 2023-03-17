@@ -1,39 +1,61 @@
 package dtos;
 
-public class PhoneDTO {
+import entities.Phone;
 
-    private String PhoneNumber;
-    private String description;
+import java.util.ArrayList;
+import java.util.List;
 
-    public PhoneDTO(String PhoneNumber, String description) {
-        this.PhoneNumber = PhoneNumber;
-        this.description = description;
+public class PhoneDTO
+{
+    private String id;
+    private String descriptionPhone;
+
+    public PhoneDTO(String id, String descriptionPhone)
+    {
+        this.id = id;
+        this.descriptionPhone = descriptionPhone;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
+    public PhoneDTO(Phone phone)
+    {
+        this.id = phone.getId();
+        this.descriptionPhone = phone.getDescriptionPhone();
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+    public static List<PhoneDTO> getPhoneDTO(List<Phone> phones)
+    {
+        List<PhoneDTO> phoneDTOs = new ArrayList<>();
+        for (Phone phone : phones)
+        {
+            phoneDTOs.add(new PhoneDTO(phone));
+        }
+        return phoneDTOs;
     }
 
-    public String getDescription() {
-        return description;
+    public static List<PhoneDTO> getPhoneDTO(Phone phonePhonenumber)
+    {
+        List<PhoneDTO> phoneDTOs = new ArrayList<>();
+        phoneDTOs.add(new PhoneDTO(phonePhonenumber));
+        return phoneDTOs;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getDescriptionPhone()
+    {
+        return descriptionPhone;
     }
 
-    @Override
-    public String toString() {
-        return "PhoneDTO{" +
-                "PhoneNumber='" + PhoneNumber + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+    public void setDescriptionPhone(String descriptionPhone)
+    {
+        this.descriptionPhone = descriptionPhone;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
     }
 }
-
-
-

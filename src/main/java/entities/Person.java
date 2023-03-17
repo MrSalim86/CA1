@@ -1,48 +1,46 @@
 package entities;
 
+import dtos.AddressDTO;
+import dtos.HobbyDTO;
+import dtos.PhoneDTO;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
+@NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "firstName")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "age")
+    @Column(name = "age", nullable = false)
     private int age;
 
-    @ManyToOne
-    @JoinColumn(name = "Hobby_nameHobby", referencedColumnName = "name")
-    private Hobby hobby;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Hobby_nameHobby", nullable = false)
+    private Hobby hobbyNamehobby;
 
-    @ManyToOne
-    @JoinColumn(name = "Address_street", referencedColumnName = "adress")
-    private Address address;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Address_street", nullable = false)
+    private Address addressStreet;
 
-    @ManyToOne
-    @JoinColumn(name = "Phone_PhoneNumber", referencedColumnName = "PhoneNumber")
-    private Phone phone;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "Phone_PhoneNumber", nullable = false)
+    private Phone phonePhonenumber;
 
     public Person() {
-    }
-
-    public Person(int id, String email, String firstName, String lastName, int age) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
     }
 
     public Person(String email, String firstName, String lastName, int age) {
@@ -52,36 +50,49 @@ public class Person {
         this.age = age;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public Person(String email, String firstName, String lastName, int age, Hobby hobbyNamehobby, Address addressStreet, Phone phonePhonenumber) {
         this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.age = age;
+        this.hobbyNamehobby = hobbyNamehobby;
+        this.addressStreet = addressStreet;
+        this.phonePhonenumber = phonePhonenumber;
+    }
+
+    public Person(String email, String firstName, String lastName, int age, List<HobbyDTO> hobbies, AddressDTO address, List<PhoneDTO> phones)
+    {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.hobbyNamehobby = hobbyNamehobby;
+        this.addressStreet = addressStreet;
+        this.phonePhonenumber = phonePhonenumber;
+    }
+
+    public Hobby getHobbyNamehobby() {
+        return hobbyNamehobby;
+    }
+
+    public void setHobbyNamehobby(Hobby hobbyNamehobby) {
+        this.hobbyNamehobby = hobbyNamehobby;
+    }
+
+    public Phone getPhonePhonenumber() {
+        return phonePhonenumber;
+    }
+
+    public void setPhonePhonenumber(Phone phonePhonenumber) {
+        this.phonePhonenumber = phonePhonenumber;
+    }
+
+    public Address getAddressStreet() {
+        return addressStreet;
+    }
+
+    public void setAddressStreet(Address addressStreet) {
+        this.addressStreet = addressStreet;
     }
 
     public int getAge() {
@@ -92,28 +103,66 @@ public class Person {
         this.age = age;
     }
 
-    public Hobby getHobby() {
-        return hobby;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setHobby(Hobby hobby) {
-        this.hobby = hobby;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPhones(List<Phone> phones)
+    {
+        this.phonePhonenumber = phonePhonenumber;
+    }
+
+    public void setHobbies(List<Hobby> hobbies)
+    {
+        this.hobbyNamehobby = hobbyNamehobby;
+    }
+
+    public void setAddresses(List<Address> addresses)
+    {
+        this.addressStreet = addressStreet;
+    }
+
+    public void setAddress(Address address)
+    {
+        this.addressStreet = addressStreet;
+    }
+
+    public void setHobby(Hobby hobby)
+    {
+        this.hobbyNamehobby = hobbyNamehobby;
+    }
+
+    public void setPhone(Phone phone)
+    {
+        this.phonePhonenumber = phonePhonenumber;
     }
 
     @Override
@@ -124,9 +173,19 @@ public class Person {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", hobby=" + hobby +
-                ", address=" + address +
-                ", phone=" + phone +
+                ", hobbyNamehobby=" + hobbyNamehobby +
+                ", addressStreet=" + addressStreet +
+                ", phonePhonenumber=" + phonePhonenumber +
                 '}';
+    }
+
+    public void addPhone(Phone ph)
+    {
+        this.phonePhonenumber = phonePhonenumber;
+    }
+
+    public void addHobby(Hobby h)
+    {
+        this.hobbyNamehobby = hobbyNamehobby;
     }
 }

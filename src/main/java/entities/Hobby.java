@@ -1,15 +1,18 @@
 package entities;
 
+import dtos.HobbyDTO;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@NamedQuery(name = "Hobby.deleteAllRows", query = "DELETE from Hobby")
 @Table(name = "Hobby")
 public class Hobby {
     @Id
     @Column(name = "name", nullable = false)
-    private String id;
+    private String name;
 
     @Column(name = "wikiLink", nullable = false)
     private String wikiLink;
@@ -20,13 +23,25 @@ public class Hobby {
     @Column(name = "type", nullable = false, length = 45)
     private String type;
 
-    @OneToMany(mappedBy = "Hobby_nameHobby")
+    @OneToMany(mappedBy = "hobbyNamehobby")
     private Set<Person> people = new LinkedHashSet<>();
 
     public Hobby() {
     }
 
     public Hobby(String name, String wikiLink, String category, String type) {
+        this.name = name;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
+    }
+
+    public Hobby(HobbyDTO hobbyDTO)
+    {
+        this.name = hobbyDTO.getName();
+        this.wikiLink = hobbyDTO.getWikiLink();
+        this.category = hobbyDTO.getCategory();
+        this.type = hobbyDTO.getType();
     }
 
     public Set<Person> getPeople() {
@@ -61,16 +76,11 @@ public class Hobby {
         this.wikiLink = wikiLink;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
-    public void getName() {
-    }
-
-
-
 }

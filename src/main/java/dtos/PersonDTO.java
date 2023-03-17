@@ -1,16 +1,26 @@
 package dtos;
 
 import entities.Person;
+import entities.Phone;
+import entities.Hobby;
+import entities.Address;
+import entities.CityInfo;
 
-public class PersonDTO {
+import java.util.ArrayList;
+import java.util.List;
+
+public class PersonDTO
+{
     private int id;
     private String email;
     private String firstName;
     private String lastName;
     private int age;
-    private String hobbyName;
-    private String phoneNumber;
-    private String address;
+    private List<HobbyDTO> hobbies;
+    private List<PhoneDTO> phones;
+    private AddressDTO address;
+    private PhoneDTO phone;
+    private HobbyDTO hobby;
 
     public PersonDTO(int id, String email, String firstName, String lastName, int age) {
         this.id = id;
@@ -20,25 +30,75 @@ public class PersonDTO {
         this.age = age;
     }
 
-    public PersonDTO(int id, String email, String firstName, String lastName, int age, String hobbyName, String phoneNumber, String address) {
-        this.id = id;
+    public PersonDTO(String email, String firstName, String lastName, int age)
+    {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.hobbyName = hobbyName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
     }
 
-    public PersonDTO(entities.Person person)
+    public PersonDTO(Person person)
     {
+        this.id = person.getId();
         this.email = person.getEmail();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.age = person.getAge();
     }
 
+    public PersonDTO(Person person, List<Hobby> hobbies, List<Phone> phones, Address address, CityInfo cityInfo)
+    {
+        this.id = person.getId();
+        this.email = person.getEmail();
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.age = person.getAge();
+        this.hobbies = HobbyDTO.getHobbyDTO(hobbies);
+        this.phones = PhoneDTO.getPhoneDTO(phones);
+        this.address = new AddressDTO(address, cityInfo);
+    }
+
+    public PersonDTO(String email, String firstName, String lastName, int age, HobbyDTO hobbyDTO, AddressDTO addressDTO, PhoneDTO phoneDTO)
+    {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.hobbies = new ArrayList<>();
+        this.hobbies.add(hobbyDTO);
+        this.phones = new ArrayList<>();
+        this.phones.add(phoneDTO);
+        this.address = addressDTO;
+    }
+
+    public PersonDTO(List<Person> personList)
+    {
+        this.hobbies = new ArrayList<>();
+        this.phones = new ArrayList<>();
+        for (Person person : personList) {
+            this.id = person.getId();
+            this.email = person.getEmail();
+            this.firstName = person.getFirstName();
+            this.lastName = person.getLastName();
+            this.age = person.getAge();
+            this.hobbies.add(new HobbyDTO(person.getHobbyNamehobby()));
+            this.phones.add(new PhoneDTO(person.getPhonePhonenumber()));
+            this.address = new AddressDTO(person.getAddressStreet());
+        }
+    }
+
+    public static List<PersonDTO> fromPersonList(List<Person> personList) {
+        List<PersonDTO> personDTOs = new ArrayList<>();
+        for (Person person : personList) {
+            PersonDTO dto = new PersonDTO(person);
+            dto.setHobbies(HobbyDTO.getHobbyDTO(person.getHobbyNamehobby()));
+            dto.setPhones(PhoneDTO.getPhoneDTO(person.getPhonePhonenumber()));
+            dto.setAddress(new AddressDTO(person.getAddressStreet(), person.getAddressStreet().getCityInfo()));
+            personDTOs.add(dto);
+        }
+        return personDTOs;
+    }
 
     public int getId() {
         return id;
@@ -48,60 +108,90 @@ public class PersonDTO {
         this.id = id;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)
+    {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName)
+    {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public int getAge()
+    {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age)
+    {
         this.age = age;
     }
 
-    public String getHobbyName() {
-        return hobbyName;
+    public List<HobbyDTO> getHobbies()
+    {
+        return hobbies;
     }
 
-    public void setHobbyName(String hobbyName) {
-        this.hobbyName = hobbyName;
+    public void setHobbies(List<HobbyDTO> hobbies)
+    {
+        this.hobbies = hobbies;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public List<PhoneDTO> getPhones()
+    {
+        return phones;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhones(List<PhoneDTO> phones)
+    {
+        this.phones = phones;
     }
 
-    public String getAddress() {
+    public AddressDTO getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(AddressDTO address)
+    {
         this.address = address;
+    }
+
+    public PhoneDTO getPhone() {
+        return phone;
+    }
+
+    public void setPhone(PhoneDTO phone) {
+        this.phone = phone;
+    }
+
+    public HobbyDTO getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(HobbyDTO hobby) {
+        this.hobby = hobby;
     }
 
     @Override
@@ -112,9 +202,9 @@ public class PersonDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", hobbyName='" + hobbyName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", address='" + address + '\'' +
+                ", hobbies=" + hobbies +
+                ", phones=" + phones +
+                ", address=" + address +
                 '}';
     }
 }

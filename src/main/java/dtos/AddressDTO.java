@@ -1,21 +1,59 @@
 package dtos;
 
+import entities.Address;
+import entities.CityInfo;
+
+import java.util.List;
+
 public class AddressDTO {
     private String id;
     private String additionalInfo;
     private String street;
-    private String zipcode;
-    private String city;
+    private CityInfoDTO cityInfo;
 
-    public AddressDTO(String id, String additionalInfo, String street, String zipcode, String city) {
+    public AddressDTO() {
+    }
+
+    public AddressDTO(String id, String additionalInfo, String street, CityInfoDTO cityInfo) {
         this.id = id;
         this.additionalInfo = additionalInfo;
         this.street = street;
-        this.zipcode = zipcode;
-        this.city = city;
+        this.cityInfo = cityInfo;
     }
 
-    // getters og setters
+    public AddressDTO(String additionalInfo, String street, CityInfoDTO cityInfo) {
+        this.additionalInfo = additionalInfo;
+        this.street = street;
+        this.cityInfo = cityInfo;
+    }
+
+    public AddressDTO(Address address)
+    {
+        this.id = address.getId();
+        this.additionalInfo = address.getAdditionalInfo();
+        this.street = address.getStreet();
+        this.cityInfo = new CityInfoDTO(address.getCityinfoZipcode());
+    }
+
+    public AddressDTO(Address address, CityInfo cityInfo)
+    {
+        this.id = address.getId();
+        this.additionalInfo = address.getAdditionalInfo();
+        this.street = address.getStreet();
+        this.cityInfo = new CityInfoDTO(cityInfo);
+    }
+
+    public AddressDTO(List<Address> addressEntities)
+    {
+        addressEntities.forEach((address) ->
+        {
+            this.id = address.getId();
+            this.street = address.getStreet();
+            this.additionalInfo = address.getAdditionalInfo();
+            this.cityInfo = new CityInfoDTO(address.getCityInfo());
+        });
+    }
+
     public String getId() {
         return id;
     }
@@ -40,19 +78,11 @@ public class AddressDTO {
         this.street = street;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public CityInfoDTO getCityInfo() {
+        return cityInfo;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityInfo(CityInfoDTO cityInfo) {
+        this.cityInfo = cityInfo;
     }
 }
