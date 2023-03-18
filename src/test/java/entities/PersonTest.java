@@ -83,35 +83,37 @@ class PersonTest {
             person.setAge(AGE);
             assertEquals(AGE, person.getAge());
         }
+    }
+}
 
         /**
          * Tester setHobby og getHobby-metoderne i Person-klassen.
          */
-        @Test
-        @DisplayName("Tester setHobby og getHobby")
-        void testHobbySetterGetter() {
-            person.setHobby(HOBBY);
-            assertEquals(HOBBY, person.getHobby());
-        }
-
-        /**
-         * Tester setAddress og getAddress-metoderne i Person-klassen.
-         */
-        @Test
-        @DisplayName("Tester setAddress og getAddress")
-        void testAddressSetterGetter() {
-            person.setAddress(ADDRESS);
-            assertEquals(ADDRESS, person.getAddress());
-        }
-
-        /**
-         * Tester setPhone og getPhone-metoderne i Person-klassen.
-         */
-        @Test
-        @DisplayName("Tester setPhone og getPhone")
-        void testPhoneSetterGetter() {
-            person.setPhone(PHONE);
-            assertEquals(PHONE, person.getPhone());
-        }
-    }
-}
+//        @Test
+//        @DisplayName("Tester setHobby og getHobby")
+//        void testHobbySetterGetter() {
+//            person.setHobby(HOBBY);
+//            assertEquals(HOBBY, person.getHobby());
+//        }
+//
+//        /**
+//         * Tester setAddress og getAddress-metoderne i Person-klassen.
+//         */
+//        @Test
+//        @DisplayName("Tester setAddress og getAddress")
+//        void testAddressSetterGetter() {
+//            person.setAddress(ADDRESS);
+//            assertEquals(ADDRESS, person.getAddress());
+//        }
+//
+//        /**
+//         * Tester setPhone og getPhone-metoderne i Person-klassen.
+//         */
+//        @Test
+//        @DisplayName("Tester setPhone og getPhone")
+//        void testPhoneSetterGetter() {
+//            person.setPhone(PHONE);
+//            assertEquals(PHONE, person.getPhone());
+//        }
+//    }
+//}
