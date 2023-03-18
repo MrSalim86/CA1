@@ -38,12 +38,12 @@
 //        /**
 //         * Tester setId og getId-metoderne i Hobby-klassen.
 //         */
-////        @Test
-////        @DisplayName("Tester setId og getId")
-////        void testIdSetterGetter() {
-////          //  hobby.setId(HOBBY_NAME);
-////            assertEquals(HOBBY_NAME, hobby.getId());
-////        }
+//        @Test
+//        @DisplayName("Tester setId og getId")
+//        void testIdSetterGetter() {
+//          //  hobby.setId(HOBBY_NAME);
+//            assertEquals(HOBBY_NAME, hobby.getId());
+//        }
 //
 //        /**
 //         * Tester setWikiLink og getWikiLink-metoderne i Hobby-klassen.
